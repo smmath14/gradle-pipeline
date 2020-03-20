@@ -77,7 +77,7 @@ resources:
       buildName: gradle_build
       buildNumber: ${run_number}
 pipelines:
-  - name: gradle-pipeline
+  - name: gradle_pipeline
     configuration:
       environmentVariables:
         readOnly:
