@@ -11,7 +11,7 @@ resources:
   - name:       gradle_fileSpec
     type:       FileSpec
     configuration:     
-      sourceArtifactory:    demoArt
+      sourceArtifactory:    artifactory
       pattern:              team1-gradle-dev-us/com/jfrog/frogsws/0.1.0-*/frogsws-0.1.0-*.jar
       target:               gradle_results/*.jar
       buildName:            gradle_build   # optional
@@ -20,7 +20,7 @@ resources:
   - name:       npm_fileSpec
     type:       FileSpec
     configuration:     
-      sourceArtifactory:    demoArt
+      sourceArtifactory:    artifactory
       pattern:              team1-npm-dev-us/angular-animate/-/angular-animate-1.4.14.tgz
       target:               npm_results/
       buildName:            npm_build   # optional
@@ -30,28 +30,28 @@ resources:
   - name: gradleBuildInfo
     type: BuildInfo
     configuration:
-      sourceArtifactory: demoArt
+      sourceArtifactory: artifactory
       buildName: gradle_build
       buildNumber: ${run_number}
       
   - name: scanned_gradleBuild_Info
     type: BuildInfo
     configuration:
-      sourceArtifactory: demoArt
+      sourceArtifactory: artifactory
       buildName: gradle_build
       buildNumber: ${run_number}
       
   - name: promoted_gradleBuild_Info
     type: BuildInfo
     configuration:
-      sourceArtifactory: demoArt
+      sourceArtifactory: artifactory
       buildName: gradle_build
       buildNumber: ${run_number}
 
   - name: docker_gradleBuild_Info
     type: BuildInfo
     configuration:
-      sourceArtifactory: demoArt
+      sourceArtifactory: artifactory
       buildName: gradle_build
       buildNumber: ${run_number}
 
@@ -59,7 +59,7 @@ resources:
   - name: scanned_gradle_dockerBuild_Info
     type: BuildInfo
     configuration:
-      sourceArtifactory: demoArt
+      sourceArtifactory: artifactory
       buildName: gradle_build
       buildNumber: ${run_number}
 
@@ -67,7 +67,7 @@ resources:
   - name: promoted_docker_gradleBuild_Info
     type: BuildInfo
     configuration:
-      sourceArtifactory: demoArt
+      sourceArtifactory: artifactory
       buildName: gradle_build
       buildNumber: ${run_number}
 
@@ -75,7 +75,7 @@ resources:
   - name: final_docker_gradleBuild_Info
     type: BuildInfo
     configuration:
-      sourceArtifactory: demoArt
+      sourceArtifactory: artifactory
       buildName: gradle_build
       buildNumber: ${run_number}
 pipelines:
@@ -103,7 +103,7 @@ pipelines:
           inputResources:
             - name:  gitRepo_code
           integrations:
-            - name: demoArt
+            - name: artifactory
           outputResources:
             - name: gradleBuildInfo     #     Currently not in use
 
@@ -156,7 +156,7 @@ pipelines:
             - name: gradleBuildInfo     
               trigger: false
           integrations:
-            - name: demoArt
+            - name: artifactory
         execution:
           onStart:
           # export artifactory ip from internal build env var to tag the docker image
@@ -169,7 +169,7 @@ pipelines:
           targetRepository:     team1-docker-dev-us
           autoPublishBuildInfo: true
           integrations:
-            - name:  demoArt
+            - name:  artifactory
           inputSteps:
             - name: Gradle_docker_build
           outputResources:
