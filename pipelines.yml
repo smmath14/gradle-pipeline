@@ -5,6 +5,8 @@ resources:
     configuration:
       path: ranjithrs/project-examples
       gitProvider: ranjithr_github
+      branches:
+        include: eplus-v2-orbitera      
 
   - name:       gradle_fileSpec
     type:       FileSpec
